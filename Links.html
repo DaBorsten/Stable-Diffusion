@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anleitung Stable Diffusion</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <style>
+        h1 {
+            color: white;
+            font-family: "Roboto", serif;
+        }
+
+        h2 {
+            color: white;
+            font-family: "Roboto", serif;
+        }
+
+        span {
+            color: white;
+            font-family: "Roboto", serif;
+        }
+
+        p {
+            color: white;
+            font-family: "Roboto", serif;
+        }
+
+        li {
+            color: white;
+            font-family: "Roboto", serif;
+        }
+
+        a {
+            color: #2d98ff;
+            font-family: "Roboto", serif;
+        }
+
+        a:active {
+            color: #2d98ff;
+        }
+
+        li {
+            line-height: 40px;
+        }
+
+        .categories {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .copyBtn {
+            background-color: #343942;
+            border: none;
+            padding: 7px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .copyBtn:hover {
+            background-color: hsl(219, 12%, 25%);
+            scale: 1.05;
+        }
+
+        .copyBtn:active {
+            background-color: hsl(219, 12%, 20%);
+            scale: 0.95;
+        }
+
+        .highlight {
+            background-color: #343942;
+            padding: 7px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body style="background-color: #0d1117;">
+    <div style="margin: auto;
+    width: 70%;
+    margin-block: 100px;
+    background-color: hsl(216, 28%, 15%);
+    padding: 50px;
+    border-radius: 10px;">
+        <h1 style="text-align: center;">Anleitung zum Erstellen von 3D Videos</h1>
+
+        <div class="categories">
+            <div>
+                <h2>Python 3.10.6:</h2>
+                <a href=" https://www.python.org/ftp/python/3.10.6/python-3.10.6-amd64.exe">
+                    https://www.python.org/ftp/python/3.10.6/python-3.10.6-amd64.exe</a>
+                <ul>
+                    <li><span class="highlight">Add to PATH</span> anklicken</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2>git:</h2>
+                <a
+                    href="https://github.com/git-for-windows/git/releases/download/v2.41.0.windows.1/Git-2.41.0-64-bit.exe">https://github.com/git-for-windows/git/releases/download/v2.41.0.windows.1/Git-2.41.0-64-bit.exe</a>
+                <ul>
+                    <li>Installiere git (Wir bauchen git später für das herunterladen von Dateien aus Github)</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2>Davinci Resolve:</h2>
+                <ul>
+                    <li>Wähle beim Exportieren bei <span class="highlight">Format</span> das Format <span
+                            class="highlight">TIFF</span> aus</li>
+                    <li>Achte auf die richtige Framerate und exportiere das Video</li>
+                    <li>Nun sollten alle Bilder in einem Ordner sein</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2>tif zu jpg konvertieren:</h2>
+                <ul>
+                    <li>Dafür verwenden wir ein Python Skript</li>
+                    <li>Erstelle eine neue Datei, die auf dem Kürzel <span class="highlight">.py</span> endet und
+                        speichere sie im gleichen Verzeichnis wie die Image Sequence</li>
+                    <li>Öffne sie und kopiere folgenden Code in die Datei uns speichere sie anschließend
+                        <div style="display: flex; flex-direction: column; width: min-content; gap: 10px;">
+                            <pre class="highlight" style="line-height: normal; padding: 20px;" id="pythonScript">
+from PIL import Image
+import os
+
+# Ordnerpfad angeben
+ordnerpfad = "./"  # Aktuelles Verzeichnis
+
+# Durch alle Dateien im Ordner iterieren
+for datei in os.listdir(ordnerpfad):
+    # Dateipfad der aktuellen Datei erstellen
+    dateipfad = os.path.join(ordnerpfad, datei)
+
+    # Nur TIF-Dateien berücksichtigen
+    if dateipfad.lower().endswith(".tif") or dateipfad.lower().endswith(".tiff"):
+        try:
+            # Bild öffnen und als JPEG speichern
+            bild = Image.open(dateipfad)
+            neuer_dateiname = os.path.splitext(dateipfad)[0] + ".jpg"
+            bild.save(neuer_dateiname, "JPEG")
+
+            print(f"{datei} konvertiert zu {os.path.basename(neuer_dateiname)}")
+
+        except Exception as e:
+            print(f"Fehler beim Konvertieren von {datei}: {str(e)}")</pre>
+                            <button class="copyBtn" onclick="copyToClipboard('pythonScript')">Kopieren
+                            </button>
+                        </div>
+                    </li>
+                    <li>Mache nun einen Doppelklick auf die Datei und lasse das Skript durchlaufen</li>
+                    <li>Nun sollten alle Bilder zwei Mal vorhanden sein aber jeweils mit einer anderen Dateiendung</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2>Stable Diffusion WebUI für AMD:</h2>
+                <a
+                    href="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Install-and-Run-on-AMD-GPUs">https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Install-and-Run-on-AMD-GPUs</a>
+                <ul>
+                    <li>Im Terminal folgendes eingeben:
+                        <div style="display: flex; flex-direction: row; gap: 10px;">
+                            <span class="highlight" id="gitInstallWebUi">git
+                                clone
+                                https://github.com/lshqqytiger/stable-diffusion-webui-directml && cd
+                                stable-diffusion-webui-directml
+                                && git submodule init && git submodule update</span>
+                            <button class="copyBtn" onclick="copyToClipboard('gitInstallWebUi')">Kopieren
+                            </button>
+                        </div>
+                    </li>
+                    <li>Die Dateien müssten ins Homeverzeichnis gespeichert werden</li>
+                    <li>Finde den Ordner und öffne ihn</li>
+                    <li>Öffne <span class="highlight">webui-user.bat</span></li>
+                </ul>
+            </div>
+
+            <div>
+                <h2>Stable Diffusion WebUI (nicht relevant für AMD Nutzer):</h2>
+                <a
+                    href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">https://github.com/AUTOMATIC1111/stable-diffusion-webui</a>
+            </div>
+
+            <div>
+                <h2>High Resolution Depth Maps for Stable Diffusion WebUI:</h2>
+                <a
+                    href="https://github.com/thygate/stable-diffusion-webui-depthmap-script">https://github.com/thygate/stable-diffusion-webui-depthmap-script</a>
+                <ul>
+                    <li>Öffne WebUI im Browser, indem du im Termianl mit <span class="highlight">Strg</span> + <span
+                            class="highlight">Linksklick</span> die lokale URL öffnest</li>
+                    <li>Navigiere zu <span class="highlight">Extensions</span> und dann <span class="highlight">Install
+                            from URL</span></li>
+                    <li>Gebe bei <span class="highlight">URL for extension's git repository</span> folgendes ein:
+                        <div style="display: flex; flex-direction: row; gap: 10px;">
+                            <span class="highlight"
+                                id="depthMapLink">https://github.com/thygate/stable-diffusion-webui-depthmap-script</span>
+                            <button class="copyBtn" onclick="copyToClipboard('depthMapLink')">Kopieren</button>
+                        </div>
+                    </li>
+                    <li>Klicke dann auf <span class="highlight">Install</span></li>
+                    <li>Starte dann das Programm neu</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2>Depth Map erzeugen:</h2>
+                <ul>
+                    <li>Navigiere im WebUI zum Tab <span class="highlight">Depth</span> und wählen dann <span
+                            class="highlight">Single Image</span> aus</li>
+                    <li>Lade nun dein Bild hoch und überprüfe die Einstellungen je nach Vorliebe</li>
+                    <li>Ist alles richtig eingestellt musst du nurnoch auf <span class="highlight">Generate</span>
+                        klicken</li>
+                    <li>Beim ersten Mal kann es länger dauern, da erst noch dafür nötige Dateien heruntergeladen werden
+                        müssen</li>
+                    <li>Mehr Infos dazu sowie den Fortschritt kann man im Terminal einsehen</li>
+                    <li>Sollte es ganz am Schluss einen Fehler geben könnte es daran liegen, dass im Temporären Ornder
+                        kein Ordner erstellt werden konnte</li>
+                    <li>Um das zu beheben musst du die Suche öffnen und <span class="highlight">%temp%</span> eingeben
+                        und mit <span class="highlight">Enter</span> bestätigen</li>
+                    <li>Erstelle nun in diesem Verzeichnis einen Ordner namens <span class="highlight">gradio</span>
+                    </li>
+                    <li>Versuche nun das Generieren erneut</li>
+                    <li>Wenn alles gut läuft kannst die die Depth Map dann herunterladen, indem du sie rechts oben unter
+                        <span class="highlight">Depth Output</span> auswählst und herunterlädtst</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2>Eb Synth:</h2>
+                <a href="https://ebsynth.com/EbSynth-Beta-Win.zip">https://ebsynth.com/EbSynth-Beta-Win.zip</a>
+                <ul>
+                    <li>Wir brauchen Eb Synth, um die Depth Map von einem Frame auf alle Frames der Image Sequence zu
+                        übertragen</li>
+                    <li>Bei <span class="highlight">Keyframes</span> wählen wir die Depth Map aus</li>
+                    <li>Bei <span class="highlight">Video</span> wählen wir die den zugehörigen Frame aus der Image
+                        Sequence aus</li>
+                    <li>Keyframe und Video müssen übereinstimmen (Normalerweise sind alle Bilder nummeriert)</li>
+                    <li>Wähle unten aus, welches der erste Keyframe ist und welcher der letzte Keyframe</li>
+                    <li>Die Zahl in der Mitte stellt den aktuellen Keyframe dar (von Keyframe und Video)</li>
+                    <li>Klicke dann auf <span class="highlight">Synth</span></li>
+                </ul>
+            </div>
+
+            <div>
+                <h2>Blender 5.3.1:</h2>
+                <a
+                    href="https://ftp.halifax.rwth-aachen.de/blender/release/Blender3.5/blender-3.5.1-windows-x64.msi">https://ftp.halifax.rwth-aachen.de/blender/release/Blender3.5/blender-3.5.1-windows-x64.msi</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function copyToClipboard(ID) {
+        let textToCopy = document.getElementById(ID).innerText
+        navigator.clipboard.writeText(textToCopy)
+    }
+</script>
