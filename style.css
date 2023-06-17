@@ -1,0 +1,94 @@
+:root {
+    --font: "Roboto", serif;
+}
+
+[data-theme="dark-mode"] {
+    --backgroundColor: #0d1117;
+    --wrapperBackgroundColor: hsl(216, 28%, 15%);
+    --fontColor: #ffffff;
+    --buttonFontColor: white;
+    --highlightBackgroundColor: #343942;
+    --buttonHoverBackgroundColor: hsl(219, 12%, 30%);
+    --buttonActiveBackgroundColor: hsl(219, 12%, 20%);
+}
+
+[data-theme="light-mode"] {
+    --backgroundColor: #f7f7f7;
+    --wrapperBackgroundColor: hsl(216, 28%, 90%);
+    --fontColor: #000000;
+    --buttonFontColor: black;
+    --highlightBackgroundColor: #c1c1c1;
+    --buttonHoverBackgroundColor: hsl(0, 0%, 70%);
+    --buttonActiveBackgroundColor: hsl(0, 0%, 75%);
+}
+
+body {
+    background-color: var(--backgroundColor);
+    font-family: var(--font);
+    color: var(--fontColor);
+}
+
+a {
+    color: #2d98ff;
+}
+
+a:active {
+    color: #2d98ff;
+}
+
+li {
+    line-height: 40px;
+}
+
+.wrapper {
+    margin: auto;
+    width: 70%;
+    margin-block: 100px;
+    background-color: var(--wrapperBackgroundColor);
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.copyBtn {
+    background-color: var(--highlightBackgroundColor);
+    border: none;
+    padding: 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--buttonFontColor);
+}
+
+.copyBtn:hover {
+    background-color: var(--buttonHoverBackgroundColor);
+    scale: 1.05;
+    box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.1);
+    transition: all ease-in-out 100ms;
+}
+
+.copyBtn:active {
+    background-color: var(--buttonActiveBackgroundColor);
+    scale: 0.95;
+    box-shadow: inset 0px 0px 15px 3px rgba(0,0,0,0.1);
+}
+
+.highlight {
+    background-color: var(--highlightBackgroundColor);
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.code {
+    line-height: normal;
+    padding: 20px;
+}
+
+img {
+    max-width: 60vw;
+    max-height: 60vh;
+}

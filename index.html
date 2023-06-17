@@ -7,86 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anleitung Stable Diffusion</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <style>
-        h1 {
-            color: white;
-            font-family: "Roboto", serif;
-        }
-
-        h2 {
-            color: white;
-            font-family: "Roboto", serif;
-        }
-
-        span {
-            color: white;
-            font-family: "Roboto", serif;
-        }
-
-        p {
-            color: white;
-            font-family: "Roboto", serif;
-        }
-
-        li {
-            color: white;
-            font-family: "Roboto", serif;
-        }
-
-        a {
-            color: #2d98ff;
-            font-family: "Roboto", serif;
-        }
-
-        a:active {
-            color: #2d98ff;
-        }
-
-        li {
-            line-height: 40px;
-        }
-
-        .categories {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .copyBtn {
-            background-color: #343942;
-            border: none;
-            padding: 7px;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-        }
-
-        .copyBtn:hover {
-            background-color: hsl(219, 12%, 25%);
-            scale: 1.05;
-        }
-
-        .copyBtn:active {
-            background-color: hsl(219, 12%, 20%);
-            scale: 0.95;
-        }
-
-        .highlight {
-            background-color: #343942;
-            padding: 7px;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 
-<body style="background-color: #0d1117;">
-    <div style="margin: auto;
-    width: 70%;
-    margin-block: 100px;
-    background-color: hsl(216, 28%, 15%);
-    padding: 50px;
-    border-radius: 10px;">
-        <h1 style="text-align: center;">Anleitung zum Erstellen von 3D Videos</h1>
+<body data-theme="dark-mode">
+    <div class="wrapper">
+        <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+            <h1>Anleitung zum Erstellen von 3D Videos</h1>
+            <button class="highlight copyBtn" onclick="changeTheme()">Theme ändern</button>
+        </div>
 
         <div class="categories">
             <div>
@@ -100,8 +30,8 @@
 
             <div>
                 <h2>git:</h2>
-                <a
-                    href="https://github.com/git-for-windows/git/releases/download/v2.41.0.windows.1/Git-2.41.0-64-bit.exe" target="_blank">https://github.com/git-for-windows/git/releases/download/v2.41.0.windows.1/Git-2.41.0-64-bit.exe</a>
+                <a href="https://github.com/git-for-windows/git/releases/download/v2.41.0.windows.1/Git-2.41.0-64-bit.exe"
+                    target="_blank">https://github.com/git-for-windows/git/releases/download/v2.41.0.windows.1/Git-2.41.0-64-bit.exe</a>
                 <ul>
                     <li>Installiere git (Wir bauchen git später für das herunterladen von Dateien aus Github)</li>
                 </ul>
@@ -115,6 +45,7 @@
                     <li>Achte auf die richtige Framerate und exportiere das Video</li>
                     <li>Nun sollten alle Bilder in einem Ordner sein</li>
                 </ul>
+                <img src="assets/tiff.png" alt="Als TIFF exportieren">
             </div>
 
             <div>
@@ -125,7 +56,7 @@
                         speichere sie im gleichen Verzeichnis wie die Image Sequence</li>
                     <li>Öffne sie und kopiere folgenden Code in die Datei uns speichere sie anschließend
                         <div style="display: flex; flex-direction: column; width: min-content; gap: 10px;">
-                            <pre class="highlight" style="line-height: normal; padding: 20px;" id="pythonScript">
+                            <pre class="highlight code" id="pythonScript">
 from PIL import Image
 import os
 
@@ -156,12 +87,13 @@ for datei in os.listdir(ordnerpfad):
                     <li>Mache nun einen Doppelklick auf die Datei und lasse das Skript durchlaufen</li>
                     <li>Nun sollten alle Bilder zwei Mal vorhanden sein aber jeweils mit einer anderen Dateiendung</li>
                 </ul>
+                <img src="assets/file-names.png" alt="Dateiendungen">
             </div>
 
             <div>
                 <h2>Stable Diffusion WebUI für AMD:</h2>
-                <a
-                    href="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Install-and-Run-on-AMD-GPUs" target="_blank">https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Install-and-Run-on-AMD-GPUs</a>
+                <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Install-and-Run-on-AMD-GPUs"
+                    target="_blank">https://github.com/AUTOMATIC1111/stable-diffusion-webui/wiki/Install-and-Run-on-AMD-GPUs</a>
                 <ul>
                     <li>Im Terminal folgendes eingeben:
                         <div style="display: flex; flex-direction: row; gap: 10px;">
@@ -178,21 +110,23 @@ for datei in os.listdir(ordnerpfad):
                     <li>Finde den Ordner und öffne ihn</li>
                     <li>Öffne <span class="highlight">webui-user.bat</span></li>
                 </ul>
+                <img src="assets/webui-user.png" alt="webui-user.bat im Explorer">
             </div>
 
             <div>
                 <h2>Stable Diffusion WebUI (nicht relevant für AMD Nutzer):</h2>
-                <a
-                    href="https://github.com/AUTOMATIC1111/stable-diffusion-webui" target="_blank">https://github.com/AUTOMATIC1111/stable-diffusion-webui</a>
+                <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui"
+                    target="_blank">https://github.com/AUTOMATIC1111/stable-diffusion-webui</a>
             </div>
 
             <div>
                 <h2>High Resolution Depth Maps for Stable Diffusion WebUI:</h2>
-                <a
-                    href="https://github.com/thygate/stable-diffusion-webui-depthmap-script" target="_blank">https://github.com/thygate/stable-diffusion-webui-depthmap-script</a>
+                <a href="https://github.com/thygate/stable-diffusion-webui-depthmap-script"
+                    target="_blank">https://github.com/thygate/stable-diffusion-webui-depthmap-script</a>
                 <ul>
                     <li>Öffne WebUI im Browser, indem du im Termianl mit <span class="highlight">Strg</span> + <span
                             class="highlight">Linksklick</span> die lokale URL öffnest</li>
+                    <img src="assets/webui öffnen.png" alt="WebUI öffnen">
                     <li>Navigiere zu <span class="highlight">Extensions</span> und dann <span class="highlight">Install
                             from URL</span></li>
                     <li>Gebe bei <span class="highlight">URL for extension's git repository</span> folgendes ein:
@@ -205,6 +139,7 @@ for datei in os.listdir(ordnerpfad):
                     <li>Klicke dann auf <span class="highlight">Install</span></li>
                     <li>Starte dann das Programm neu</li>
                 </ul>
+                <img src="assets/install depth map plugin.png" alt="Depth Map Plugin installieren">
             </div>
 
             <div>
@@ -215,6 +150,7 @@ for datei in os.listdir(ordnerpfad):
                     <li>Lade nun dein Bild hoch und überprüfe die Einstellungen je nach Vorliebe</li>
                     <li>Ist alles richtig eingestellt musst du nurnoch auf <span class="highlight">Generate</span>
                         klicken</li>
+                    <img src="assets/depth map erstellen.png" alt="Depth Map erstellen">
                     <li>Beim ersten Mal kann es länger dauern, da erst noch dafür nötige Dateien heruntergeladen werden
                         müssen</li>
                     <li>Mehr Infos dazu sowie den Fortschritt kann man im Terminal einsehen</li>
@@ -224,15 +160,18 @@ for datei in os.listdir(ordnerpfad):
                         und mit <span class="highlight">Enter</span> bestätigen</li>
                     <li>Erstelle nun in diesem Verzeichnis einen Ordner namens <span class="highlight">gradio</span>
                     </li>
+                    <img src="assets/gradio.png" alt="gradio Ordner">
                     <li>Versuche nun das Generieren erneut</li>
                     <li>Wenn alles gut läuft kannst die die Depth Map dann herunterladen, indem du sie rechts oben unter
-                        <span class="highlight">Depth Output</span> auswählst und herunterlädtst</li>
+                        <span class="highlight">Depth Output</span> auswählst und herunterlädtst
+                    </li>
                 </ul>
             </div>
 
             <div>
                 <h2>Eb Synth:</h2>
-                <a href="https://ebsynth.com/EbSynth-Beta-Win.zip" target="_blank">https://ebsynth.com/EbSynth-Beta-Win.zip</a>
+                <a href="https://ebsynth.com/EbSynth-Beta-Win.zip"
+                    target="_blank">https://ebsynth.com/EbSynth-Beta-Win.zip</a>
                 <ul>
                     <li>Wir brauchen Eb Synth, um die Depth Map von einem Frame auf alle Frames der Image Sequence zu
                         übertragen</li>
@@ -244,22 +183,16 @@ for datei in os.listdir(ordnerpfad):
                     <li>Die Zahl in der Mitte stellt den aktuellen Keyframe dar (von Keyframe und Video)</li>
                     <li>Klicke dann auf <span class="highlight">Synth</span></li>
                 </ul>
+                <img src="assets/eb synth.png" alt="Eb Synth">
             </div>
 
             <div>
                 <h2>Blender 5.3.1:</h2>
-                <a
-                    href="https://ftp.halifax.rwth-aachen.de/blender/release/Blender3.5/blender-3.5.1-windows-x64.msi" target="_blank">https://ftp.halifax.rwth-aachen.de/blender/release/Blender3.5/blender-3.5.1-windows-x64.msi</a>
+                <a href="https://ftp.halifax.rwth-aachen.de/blender/release/Blender3.5/blender-3.5.1-windows-x64.msi"
+                    target="_blank">https://ftp.halifax.rwth-aachen.de/blender/release/Blender3.5/blender-3.5.1-windows-x64.msi</a>
             </div>
         </div>
     </div>
 </body>
 
 </html>
-
-<script>
-    function copyToClipboard(ID) {
-        let textToCopy = document.getElementById(ID).innerText
-        navigator.clipboard.writeText(textToCopy)
-    }
-</script>
