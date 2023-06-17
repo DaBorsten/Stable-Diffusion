@@ -84,6 +84,13 @@ for datei in os.listdir(ordnerpfad):
                             </button>
                         </div>
                     </li>
+                    <li>Um die Abhängigkeit PIL zu installieren muss man folgendes in die CMD eingeben:
+                        <div style="display: flex; flex-direction: row; gap: 10px;">
+                            <span class="highlight" id="pipInstallPillow">pip install Pillow</span>
+                            <button class="copyBtn" onclick="copyToClipboard('pipInstallPillow')">Kopieren
+                            </button>
+                        </div>
+                    </li>
                     <li>Mache nun einen Doppelklick auf die Datei und lasse das Skript durchlaufen</li>
                     <li>Nun sollten alle Bilder zwei Mal vorhanden sein aber jeweils mit einer anderen Dateiendung</li>
                 </ul>
