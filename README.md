@@ -1,1 +1,1 @@
-<img scr="content.webp">
+<img src="content.webp">
